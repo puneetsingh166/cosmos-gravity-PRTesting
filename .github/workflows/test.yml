@@ -3,7 +3,7 @@ name: Setup of Master-Node
 
 on:
   push:
-    branches: [master,branchC]
+    branches: [branchC]
   pull_request:
     branches: [master]
 
