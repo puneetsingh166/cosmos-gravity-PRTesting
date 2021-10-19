@@ -5,7 +5,7 @@ on:
   push:
     branches: [branchC]
   pull_request:
-    branches: [branchC]
+    branches: [branchC , master]
 
 
 
