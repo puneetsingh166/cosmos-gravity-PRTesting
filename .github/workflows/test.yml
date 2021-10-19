@@ -1,5 +1,13 @@
 name: Setup of Master-Node
-on: [push,pull]
+
+
+on:
+  push:
+    branches: [branchC]
+  pull_request:
+    branches: [master]
+
+
 
 jobs:
   amd64:
@@ -13,7 +21,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: Set up QEMU
+      - name: Set up QEMU-----------------------------------master
         run: docker run --rm --privileged multiarch/qemu-user-static --reset -p yes --credential yes
 
       - name: Set up Docker Buildx
@@ -28,8 +36,8 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and push master-cosmos-validator-node
-        run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner/Dockerfile --platform  linux/amd64 --push --progress  tty .
+#       - name: Build and push master-cosmos-validator-node
+#         run: docker buildx build --tag  puneet166/new1 --file  deploy/single-node-runner/Dockerfile --platform  linux/amd64 --push --progress  tty .
 
       - name: Pull and start master node..
         uses: garygrossgarten/github-action-ssh@release
@@ -39,6 +47,10 @@ jobs:
           username: root
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
+          
+      - name: Run tm load test
+        run: sudo bash tm-load-test.sh
+     
           
           
           
@@ -59,4 +71,5 @@ jobs:
 #         run: my-cosmos-tester -c 1 -T 10 -r 10 -s 250 --broadcast-tx-method async --endpoints ws://137.184.201.190:26657/websocket  --stats-output ./stats.csv 
 #       - name: Display logs of standlone load test
 #         run: cat stats.csv
-     
+
+       
