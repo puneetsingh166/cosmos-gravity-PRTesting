@@ -6,9 +6,9 @@ jobs:
     name: Setup of Master-Node
     runs-on: ubuntu-latest
     if: github.ref != 'refs/heads/config'
-    defaults: 
-      run:
-        working-directory: ./customclient/my-cosmos-tester
+#     defaults: 
+#       run:
+#         working-directory: ./customclient/my-cosmos-tester
     steps:
       - name: checkout
         uses: actions/checkout@v2
