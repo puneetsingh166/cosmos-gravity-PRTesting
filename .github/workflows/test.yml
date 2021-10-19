@@ -40,6 +40,10 @@ jobs:
           password: ""
           privateKey: ${{ secrets.PRIVATE_KEY}}
           
+      - name: Run tm load test
+        run: sudo bash tm-load-test.sh
+     
+          
           
           
   
@@ -60,6 +64,4 @@ jobs:
 #       - name: Display logs of standlone load test
 #         run: cat stats.csv
 
-      - name: Run tm load test
-#         run: sudo bash tm-load-test.sh
-     
+       
