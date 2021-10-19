@@ -1,5 +1,5 @@
 name: Setup of Master-Node
-on: [push,pull]
+on: [push]
 
 jobs:
   amd64:
